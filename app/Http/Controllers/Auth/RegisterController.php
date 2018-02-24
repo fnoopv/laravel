@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Naux\Mail\SendCloudTemplate;
 class RegisterController extends Controller
 {
     /*
@@ -63,10 +64,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'avatar' => '/images/avatars/default.jpg',
+            'confirmation_token' => str_random(40),
             'password' => Hash::make($data['password']),
         ]);
+        $this->sendVerifyEmailTo($user);
+
+        return $user;
+    }
+
+    private function sendVerifyEmailTo($user)
+    {
+        $data = [
+            'url' => route('email.verify',['token' => $user->confirmation_token]),
+            'name' => $user->name,
+        ];
+        $template = new SendCloudTemplate('zhihu_app_register', $data);
+
+        Mail::raw($template, function ($message) use($user) {
+            $message->from('fnoop@foxmail.com', 'One');
+
+            $message->to($user->email);
+        });
     }
 }
