@@ -60,6 +60,10 @@
             </div>
         </nav>
 
+        <div class="container" style="text-align: center;">
+            @include('flash::message')
+        </div>
+
         <main class="py-4">
             @yield('content')
         </main>
@@ -67,5 +71,12 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script>
+        $('#flash-overlay-modal').modal();
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    </script>
 </body>
 </html>

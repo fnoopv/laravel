@@ -14,12 +14,15 @@ class EmailController extends Controller
 
     	if(is_null($user))
     	{
+    		flash('邮箱验证失败')->error();
     		return redirect('/');
     	}
 
     	$user->is_active = 1;
     	$user->confirmation_token = str_random(40);
     	$user->save();
+    	flash('邮箱验证成功')->success();
+
 
     	Auth::login($user);
     	return redirect('/home');
