@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('style')
+    <style type="text/css">
+        .card-body img {
+            width: 100%;
+        }
+    </style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
