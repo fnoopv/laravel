@@ -9,8 +9,8 @@ class Question extends Model
 
 	protected $fillable = ['title','body','user_id'];
 
-    public function isHidden()
+    public function topics()
     {
-    	return $this->is_hidden === 'T';
+    	return $this->belongsToMany(Topic::class)->withTimestamps();
     }
 }
