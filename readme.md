@@ -5,3 +5,4 @@
 <p><a href="https://github.com/laracasts/flash">laracasts/flash</a></p>
 <p><a href="https://github.com/NauxLiu/Laravel-SendCloud">NauxLiu/Laravel-SendCloud</a></p>
 <p><a href="https://github.com/overtrue/laravel-ueditor">overtrue/laravel-ueditor</a></p>
+<p><a href="https://github.com/select2/select2">select2/select2</a></p>
