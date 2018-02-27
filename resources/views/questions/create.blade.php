@@ -24,8 +24,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <select class="form-control js-example-placeholder-multiple js-data-example-ajax" multiple="multiple">
-                                <option value="3620194">河南</option>
+                            <select name="topics[]" class="form-control js-example-placeholder-multiple js-data-example-ajax" multiple="multiple">
                             </select>
                         </div>
                         <div class="form-group">
