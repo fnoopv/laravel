@@ -1,13 +1,5 @@
 @extends('layouts.app')
 
-@section('style')
-    <style type="text/css">
-        .card-body img {
-            width: 100%;
-        }
-    </style>
-@endsection
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -16,7 +8,7 @@
                 <div class="card-header">
                     {{ $question->title }}
                     @foreach($question->topics as $topic)
-                        <span class="badge">{{ $topic->name }}</span>
+                        <a class="topic" href="/topic/{{ $topic->id }}">{{ $topic->name }}</a>
                     @endforeach
                 </div>
                 <div class="card-body">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\QuestionRepository;
 use App\Topic;
 use Auth;
 use App\Question;
@@ -10,6 +11,13 @@ use App\Http\Requests\StoreQuestionRequest;
 
 class QuestionsController extends Controller
 {
+    protected $questionRepository;
+
+    public function _construct(QuestionRepository $questionRepository)
+    {
+        $this->middleware('auth')->except(['index','show']);
+        $this->questionRepository = $questionRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +53,7 @@ class QuestionsController extends Controller
             'user_id' => Auth::id(),
         ];
 
-        $question = Question::create($data);
+        $question = $this->Question::create($data);
 
         $question->topics()->attach($topics);
 
