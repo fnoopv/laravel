@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('style')
+
+@endsection
 @section('content')
 @include('vendor.ueditor.assets')
 <div class="container">
@@ -21,6 +24,11 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            <select class="form-control js-example-placeholder-multiple js-data-example-ajax" multiple="multiple">
+                                <option value="3620194">河南</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <script id="ueditor" name="body" type="text/plain"  class="form-control{{ $errors->has('body') ? '  is-invalid' : '' }}" style="width: 100%;height: 100%;" required>
                                 {!! old('body') !!}
                             </script>
@@ -37,11 +45,84 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
+@section('js')
+    <script type="text/javascript">
     var ue = UE.getEditor('ueditor');
     ue.ready(function() {
     ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
     });
-</script>
+
+    $(document).ready(function() {
+        function formatTopic (topic) {
+
+            return "<div class='select2-result-repository clearfix'>" +
+
+            "<div class='select2-result-repository__meta'>" +
+
+            "<div class='select2-result-repository__title'>" +
+
+            topic.name ? topic.name : "Laravel"   +
+
+                "</div></div></div>";
+
+        }
+
+
+        function formatTopicSelection (topic) {
+
+            return topic.name || topic.text;
+
+        }
+
+
+        $(".js-example-placeholder-multiple").select2({
+
+            tags: true,
+
+            placeholder: '选择相关话题',
+
+            minimumInputLength: 2,
+
+            ajax: {
+
+                url: '/api/topics',
+
+                dataType: 'json',
+
+                delay: 250,
+
+                data: function (params) {
+
+                    return {
+
+                        q: params.term
+
+                    };
+
+                },
+
+                processResults: function (data, params) {
+
+                    return {
+
+                        results: data
+
+                    };
+
+                },
+
+                cache: true
+
+            },
+
+            templateResult: formatTopic,
+
+            templateSelection: formatTopicSelection,
+
+            escapeMarkup: function (markup) { return markup; }
+
+        });
+    });
+    </script>
+@endsection
 @endsection
