@@ -25,7 +25,8 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        return 'index';
+        $questions = $this->getQuestionsFeed();
+        return view('questions.index',compact('questions'));
     }
 
     /**
@@ -53,7 +54,7 @@ class QuestionsController extends Controller
             'user_id' => Auth::id(),
         ];
 
-        $question = Question::create($data);
+        $question = $this->createData($data);
 
         $question->topics()->attach($topics);
 
@@ -80,7 +81,7 @@ class QuestionsController extends Controller
      */
     public function edit($id)
     {
-        $question = Question::find($id);
+        $question = $this->byId($id);
         if (Auth::user()->owns($question))
         {
             return view('questions.edit',compact('question'));
@@ -97,7 +98,7 @@ class QuestionsController extends Controller
      */
     public function update(StoreQuestionRequest $request, $id)
     {
-        $question = Question::find($id);
+        $question = $this->byId($id);
         $topics = $this->nomallizeTopic($request->get('topics'));
 
         $question->update([
@@ -118,7 +119,13 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = $this->byId($id);
+        if (Auth::user()->owns($question))
+        {
+            $question->delete();
+            return redirect('/');
+        }
+        abort('403','Forbidden');
     }
 
     private function nomallizeTopic(array $topics)
@@ -138,5 +145,15 @@ class QuestionsController extends Controller
     public function byId($id)
     {
         return Question::find($id);
+    }
+
+    public function getQuestionsFeed()
+    {
+        return Question::latest('updated_at')->published()->with('user')->get();
+    }
+
+    public function createData(array $attibute)
+    {
+        return Question::create($attibute);
     }
 }

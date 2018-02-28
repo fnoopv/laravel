@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">New Problem</div>
+                    <div class="card-header">Edit Problem</div>
 
                     <div class="card-body">
                         <form action="/questions/{{ $question->id }}" method="post">
