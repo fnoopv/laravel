@@ -16,17 +16,22 @@ use App\Question;
  */
 class QuestionRepository
 {
+    protected $question;
+    public function _construct(Question $question)
+    {
+        $this->question = $question;
+    }
     /**
      * @param $id
      * @return mixed
      */
     public function byIdWithTopics($id)
     {
-        return Question::where('id',$id)->with('topics')->first();
+        return $this->question::where('id',$id)->with('topics')->first();
     }
 
     public function create(array $attributes)
     {
-        return Question::create($attributes);
+        return $this->question::create($attributes);
     }
 }

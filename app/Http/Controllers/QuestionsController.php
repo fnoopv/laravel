@@ -53,7 +53,7 @@ class QuestionsController extends Controller
             'user_id' => Auth::id(),
         ];
 
-        $question = $this->Question::create($data);
+        $question = Question::create($data);
 
         $question->topics()->attach($topics);
 
@@ -69,7 +69,6 @@ class QuestionsController extends Controller
     public function show($id)
     {
         $question = Question::where('id',$id)->with('topics')->first();
-
         return view('questions.show',compact('question'));
     }
 
@@ -81,7 +80,12 @@ class QuestionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = Question::find($id);
+        if (Auth::user()->owns($question))
+        {
+            return view('questions.edit',compact('question'));
+        }
+        return back();
     }
 
     /**
@@ -91,9 +95,19 @@ class QuestionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreQuestionRequest $request, $id)
     {
-        //
+        $question = Question::find($id);
+        $topics = $this->nomallizeTopic($request->get('topics'));
+
+        $question->update([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+
+        ]);
+        $question->topics()->sync($topics);
+
+        return redirect()->route('questions.show',[$question->id]);
     }
 
     /**
@@ -119,5 +133,10 @@ class QuestionsController extends Controller
 
            return $newTopic->id;
         })->toArray();
+    }
+
+    public function byId($id)
+    {
+        return Question::find($id);
     }
 }
