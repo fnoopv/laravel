@@ -38,7 +38,7 @@
                                     </span>
                                         @endif
                                     </div>
-                                    <button type="submit" class="btn btn-success pull-right" style="margin: 10px;">Submit</button>
+                                    <button type="submit" class="btn btn-success" style="margin: 10px;float:right">Submit</button>
                                     </form>
                                     </div>
                                     </div>

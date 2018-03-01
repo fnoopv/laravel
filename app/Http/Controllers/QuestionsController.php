@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\QuestionRepository;
 use App\Topic;
 use Auth;
 use App\Question;
@@ -9,10 +10,11 @@ use App\Http\Requests\StoreQuestionRequest;
 
 class QuestionsController extends Controller
 {
-    protected $questionRepository;
+    protected $question;
 
-    public function _construct()
+    public function __construct(QuestionRepository $questionRepository)
     {
+        $this->question = $questionRepository;
         $this->middleware('auth')->except(['index','show']);
     }
     /**
@@ -22,7 +24,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = $this->getQuestionsFeed();
+        $questions = $this->question->getQuestionsFeed();
         return view('questions.index',compact('questions'));
     }
 
@@ -44,14 +46,14 @@ class QuestionsController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        $topics = $this->nomallizeTopic($request->get('topics'));
+        $topics = $this->question->nomallizeTopic($request->get('topics'));
         $data = [
             'title' => $request->get('title'),
             'body' => $request->get('body'),
             'user_id' => Auth::id()
         ];
 
-        $question = $this->createData($data);
+        $question = $this->question->createData($data);
 
         $question->topics()->attach($topics);
 
@@ -66,7 +68,7 @@ class QuestionsController extends Controller
      */
     public function show($id)
     {
-        $question = $this->byIdWithTopics($id);
+        $question = $this->question->byIdWithTopicsAndAnswers($id);
         return view('questions.show',compact('question'));
     }
 
@@ -78,7 +80,7 @@ class QuestionsController extends Controller
      */
     public function edit($id)
     {
-        $question = $this->byId($id);
+        $question = $this->question->byId($id);
         if (Auth::user()->owns($question))
         {
             return view('questions.edit',compact('question'));
@@ -95,8 +97,8 @@ class QuestionsController extends Controller
      */
     public function update(StoreQuestionRequest $request, $id)
     {
-        $question = $this->byId($id);
-        $topics = $this->nomallizeTopic($request->get('topics'));
+        $question = $this->question->byId($id);
+        $topics = $this->question->getQuestionsFeed($request->get('topics'));
 
         $question->update([
             'title' => $request->get('title'),
@@ -116,44 +118,12 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        $question = $this->byId($id);
+        $question = $this->question->byId($id);
         if (Auth::user()->owns($question))
         {
             $question->delete();
             return redirect('/');
         }
         abort('403','Forbidden');
-    }
-
-    public function nomallizeTopic(array $topics)
-    {
-        return collect($topics)->map(function ($topic){
-           if (is_numeric($topic)) {
-               Topic::find($topic)->increment('questions_count');
-               return (int) $topic;
-           }
-           $newTopic = Topic::create(['name' => $topic,'questions_count'=>1]);
-
-           return $newTopic->id;
-        })->toArray();
-    }
-
-    public function byId($id)
-    {
-        return Question::find($id);
-    }
-
-    public function getQuestionsFeed()
-    {
-        return Question::latest('updated_at')->published()->with('user')->get();
-    }
-
-    public function createData(array $attibute)
-    {
-        return Question::create($attibute);
-    }
-    public function byIdWithTopics($id)
-    {
-        return Question::where('id',$id)->with('topics')->first();
     }
 }
