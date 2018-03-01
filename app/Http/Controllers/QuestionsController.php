@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\QuestionRepository;
 use App\Topic;
 use Auth;
 use App\Question;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreQuestionRequest;
 
 class QuestionsController extends Controller
 {
     protected $questionRepository;
 
-    public function _construct(QuestionRepository $questionRepository)
+    public function _construct()
     {
         $this->middleware('auth')->except(['index','show']);
-        $this->questionRepository = $questionRepository;
     }
     /**
      * Display a listing of the resource.
@@ -51,7 +48,7 @@ class QuestionsController extends Controller
         $data = [
             'title' => $request->get('title'),
             'body' => $request->get('body'),
-            'user_id' => Auth::id(),
+            'user_id' => Auth::id()
         ];
 
         $question = $this->createData($data);
@@ -69,7 +66,7 @@ class QuestionsController extends Controller
      */
     public function show($id)
     {
-        $question = Question::where('id',$id)->with('topics')->first();
+        $question = $this->byIdWithTopics($id);
         return view('questions.show',compact('question'));
     }
 
@@ -92,8 +89,8 @@ class QuestionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param StoreQuestionRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(StoreQuestionRequest $request, $id)
@@ -128,14 +125,13 @@ class QuestionsController extends Controller
         abort('403','Forbidden');
     }
 
-    private function nomallizeTopic(array $topics)
+    public function nomallizeTopic(array $topics)
     {
         return collect($topics)->map(function ($topic){
            if (is_numeric($topic)) {
                Topic::find($topic)->increment('questions_count');
                return (int) $topic;
            }
-
            $newTopic = Topic::create(['name' => $topic,'questions_count'=>1]);
 
            return $newTopic->id;
@@ -155,5 +151,9 @@ class QuestionsController extends Controller
     public function createData(array $attibute)
     {
         return Question::create($attibute);
+    }
+    public function byIdWithTopics($id)
+    {
+        return Question::where('id',$id)->with('topics')->first();
     }
 }
