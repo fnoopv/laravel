@@ -24,7 +24,7 @@ class StoreAnswerRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' =>'required|min:12'
+            'body' =>'required'
         ];
     }
 }

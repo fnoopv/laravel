@@ -36,7 +36,7 @@
                     @foreach($question->answers as $answer)
                         <div class="media">
                             <a href="#" class="media-left" style="width: 10%">
-                                <img width="36" src="{{ $answer->user->avatar }}" alt="{{ $answer->user->name }}">
+                                <img width="32" src="{{ $answer->user->avatar }}" alt="{{ $answer->user->name }}">
                             </a>
                             <div class="media-body">
                                 <h4 class="media-heading">
