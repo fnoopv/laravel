@@ -33,11 +33,13 @@
                     <h2>{{ $question->followers_count }}</h2>
                     <span>关注者</span>
                 </div>
-                <div class="card-body">
-                    <a href="/question/{{ $question->id }}/follow" class="btn btn-info{{ Auth::user()->followed($question->id)?'btn-success':'' }}" role="button">
-                        {{ Auth::user()->followed($question->id)?'已关注':'关注问题' }}
-                    </a>
+                <div class="card-body row">
+                    <div class="col-md-6">
+                    <question-follow-button question="{{ $question->id }}" user="{{ Auth::id() }}"></question-follow-button>
+                    </div>
+                    <div class="col-md-6">
                     <a href="#ueditor" class="btn btn-primary">提交答案</a>
+                    </div>
                 </div>
             </div>
         </div>
