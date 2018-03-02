@@ -3,8 +3,8 @@
 @section('content')
 @include('vendor.ueditor.assets')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">
                     {{ $question->title }}
@@ -27,7 +27,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header question_follow">
+                    <h2>{{ $question->followers_count }}</h2>
+                    <span>关注者</span>
+                </div>
+                <div class="card-body">
+                    <a href="/question/{{ $question->id }}/follow" class="btn btn-info{{ Auth::user()->followed($question->id)?'btn-success':'' }}" role="button">
+                        {{ Auth::user()->followed($question->id)?'已关注':'关注问题' }}
+                    </a>
+                    <a href="#ueditor" class="btn btn-primary">提交答案</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">
                     {{ $question->answers_count }} answers
@@ -51,9 +65,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
+                    @if(Auth::check())
                     <form action="/questions/{{ $question->id }}/answer" method="post">
                         {!! csrf_field() !!}
                         <div class="form-group">
@@ -68,6 +83,9 @@
                         </div>
                         <button type="submit" class="btn btn-success" style="margin: 10px; float:right">Answer</button>
                     </form>
+                    @else
+                          <a href="{{ url('login') }}" class="btn btn-success btn-block">Login to answer</a>
+                    @endif
                 </div>
             </div>
         </div>

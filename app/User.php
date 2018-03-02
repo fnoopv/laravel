@@ -20,11 +20,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password','avatar','confirmation_token'
     ];
-
-    public function owns(Model $model)
-    {
-        return $this->id == $model->user_id;
-    }
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -34,11 +29,41 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @param Model $model
+     * @return bool
+     */
+    public function owns(Model $model)
+    {
+        return $this->id == $model->user_id;
+    }
+
+    public function follows()
+    {
+        return $this->belongsToMany(Question::class,'user_question')->withTimeStamps();
+    }
+
+    public function followThis($question)
+    {
+        return $this->follows()->toggle($question);
+    }
+
+    public function followed($question)
+    {
+        return !! $this->follows()->where('question_id',$question)->count();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function answers()
     {
         return $this->hasMany(Answer::class);
     }
 
+    /**
+     * @param string $token
+     */
     public function sendPasswordResetNotification($token)
     {
         $data = [
