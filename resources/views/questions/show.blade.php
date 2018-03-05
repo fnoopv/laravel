@@ -62,6 +62,7 @@
                                 </h4>
                                 {!! $answer->body !!}
                             </div>
+                            <user-vote-button answer="{{ $answer->id }}" count="{{ $answer->votes_count }}"></user-vote-button>
                         </div>
                     @endforeach
                 </div>
