@@ -13917,6 +13917,8 @@ window.Vue = __webpack_require__(38);
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_resource__["a" /* default */]);
 
+window.Vue.http.headers.common['Authorization'] = document.querySelector('meta[name="api_token"]').content;
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -13976,10 +13978,10 @@ if (token) {
 }
 
 /**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
+* Echo exposes an expressive API for subscribing to channels and listening
+* for events that are broadcast by Laravel. Echo and event broadcasting
+* allows your team to easily build robust real-time web applications.
+*/
 
 // import Echo from 'laravel-echo'
 
@@ -49862,12 +49864,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['question', 'user'],
+    props: ['question'],
 
     mounted: function mounted() {
         var _this = this;
 
-        this.$http.post('/api/question/follower', { 'question': this.question, 'user': this.user }).then(function (response) {
+        this.$http.post('/api/question/follower', { 'question': this.question }).then(function (response) {
             _this.followed = response.data.followed;
         });
     },
@@ -49888,7 +49890,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         follow: function follow() {
             var _this2 = this;
 
-            this.$http.post('/api/question/follow', { 'question': this.question, 'user': this.user }).then(function (response) {
+            this.$http.post('/api/question/follow', { 'question': this.question }).then(function (response) {
                 _this2.followed = response.data.followed;
             });
         }

@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body row">
                     <div class="col-md-6">
-                    <question-follow-button question="{{ $question->id }}" user="{{ Auth::id() }}"></question-follow-button>
+                    <question-follow-button question="{{ $question->id }}"></question-follow-button>
                     </div>
                     <div class="col-md-6">
                     <a href="#ueditor" class="btn btn-primary">提交答案</a>

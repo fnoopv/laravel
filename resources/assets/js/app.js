@@ -12,6 +12,8 @@ window.Vue = require('vue');
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
+window.Vue.http.headers.common['Authorization'] = document.querySelector('meta[name="api_token"]').content;
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
