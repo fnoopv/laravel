@@ -38,6 +38,17 @@ class User extends Authenticatable
         return $this->id == $model->user_id;
     }
 
+    //声明关注者与被关注者关系
+    public function followers()
+    {
+        return $this->belongsToMany(self::class,'followers','follower_id','followed_id')->withTimestamps();
+    }
+
+    public function followersUser()
+    {
+        return $this->belongsToMany(self::class,'followers','followed_id','follower_id')->withTimestamps();
+    }
+
     public function follows()
     {
         return $this->belongsToMany(Question::class,'user_question')->withTimeStamps();
@@ -51,6 +62,11 @@ class User extends Authenticatable
     public function followed($question)
     {
         return !! $this->follows()->where('question_id',$question)->count();
+    }
+
+    public function followThisUser($user)
+    {
+        return $this->followers()->toggle($user);
     }
 
     /**

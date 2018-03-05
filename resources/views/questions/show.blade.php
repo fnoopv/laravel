@@ -67,6 +67,36 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="card">
+                <a><img class="card-img-top" src="{{ $question->user->avatar }}" alt="{{ $question->user->name }}"></a>
+                <div class="card-body">
+                    <h4 class="card-title" style="text-align: center"><b>{{ $question->user->name }}</b></h4>
+                    <div class="user-statics">
+                        <div class="statics-item text-center">
+                            <div class="statics-text">问题</div>
+                            <div class="ststics-count">{{ $question->user->questions_count }}</div>
+                        </div>
+                        <div class="statics-item text-center">
+                            <div class="statics-text">回答</div>
+                            <div class="ststics-count">{{ $question->user->answers_count }}</div>
+                        </div>
+                        <div class="statics-item text-center">
+                            <div class="statics-text">关注者</div>
+                            <div class="ststics-count">{{ $question->user->followers_count }}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <user-follow-button user="{{ $question->user_id }}"></user-follow-button>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="btn btn-primary">私信</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">

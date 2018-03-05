@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('comments_count')->default(0);//评论数量
             $table->integer('favorites_count')->default(0);//收藏
             $table->integer('likes_count')->default(0);//点赞数
-            $table->integer('followers')->default(0);//关注
+            $table->integer('followers_count')->default(0);//关注
             $table->integer('followings_count')->default(0);//被关注
             $table->json('settings')->nullable();
             $table->string('api_token',64)->unique();
