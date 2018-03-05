@@ -3,6 +3,8 @@
 namespace App\Notifications;
 
 use App\Channels\SendCloudChannel;
+use App\Mailer\Mailer;
+use App\Mailer\UserMailer;
 use Auth;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -38,17 +40,7 @@ class NewUserFollowNotification extends Notification
 
     public function toSendcloud($notifiable)
     {
-        $data = [
-            'url' => url('http://askforwhat.win'),
-            'name' => Auth::guard('api')->user()->name,
-        ];
-        $template = new SendCloudTemplate('user_follow_notifications', $data);
-
-        Mail::raw($template, function ($message) use ($notifiable) {
-            $message->from('fnoop@foxmail.com', 'One');
-
-            $message->to($notifiable->email);
-        });
+        (new UserMailer())->followNotifyEmail($notifiable->email);
     }
 
     /**
