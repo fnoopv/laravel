@@ -33,7 +33,7 @@
         methods: {
             vote() {
                 this.$http.post('/api/answer/vote',{'answer':this.answer}).then(response => {
-                    this.voted = response.data.voted
+                    this.voted = response.data.voted;
                     response.data.voted ? this.count ++ :this.count --
                 })
             }

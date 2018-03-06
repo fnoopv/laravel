@@ -93,6 +93,11 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class);
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class,'to_user_id');
+    }
+
     /**
      * @param string $token
      */

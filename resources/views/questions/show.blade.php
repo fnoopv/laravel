@@ -92,7 +92,7 @@
                             <user-follow-button user="{{ $question->user_id }}"></user-follow-button>
                         </div>
                         <div class="col-md-6">
-                            <a href="#" class="btn btn-primary">私信</a>
+                            <send-message user="{{ $question->user_id }}"></send-message>
                         </div>
                     </div>
                 </div>

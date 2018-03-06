@@ -33,4 +33,9 @@ class Question extends Model
     {
         return $this->belongsToMany(User::class,'user_question')->withTimestamps();
     }
+
+    public function cpmments()
+    {
+        return $this->morphMany('App\Comment','commentable');
+    }
 }
