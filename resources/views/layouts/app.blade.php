@@ -33,10 +33,11 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <a href="/questions/create" class="btn btn-default">提问</a>
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                            <li><a class="nav-link" href="{{ route('login') }}">登陆</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}">注册</a></li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,10 +45,13 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a href="/profile/{{ Auth::user()->id }}" class="dropdown-item">
+                                        个人中心
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        Logout
+                                        注销
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -10650,6 +10650,10 @@ a.text-dark:focus {
   width: 100%;
 }
 
+p img {
+  width: 100%;
+}
+
 a.topic {
   background: #eff6fa;
   padding: 1px 10px 0;
@@ -10706,8 +10710,19 @@ a.topic:hover {
   display: flex;
 }
 
+.user-statics2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 20px;
+}
+
 .statics-item {
   padding: 2px 18px;
+}
+
+.statics-item2 {
+  padding: 4px 36px;
 }
 
 .navbar-laravel {

@@ -39,6 +39,11 @@ class User extends Authenticatable
         return $this->id == $model->user_id;
     }
 
+    public function getQuestions($id)
+    {
+        return Question::where('user_id','=',$id)->get();
+    }
+
     //声明关注者与被关注者关系
     public function followers()
     {

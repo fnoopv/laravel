@@ -50258,7 +50258,7 @@ exports = module.exports = __webpack_require__(58)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50668,7 +50668,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.$http.post('/api/message/store', { 'user': this.user, 'body': this.body }).then(function (response) {
                 _this.status = response.data.status;
-                $('#modal-send-message').modal('hide');
+                _this.body = '';
+                setTimeout(function () {
+                    $('#modal-send-message').modal('hide');
+                }, 2000);
             });
         },
         showSendMessageForm: function showSendMessageForm() {

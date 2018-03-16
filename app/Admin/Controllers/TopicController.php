@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\User;
+use App\Topic;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -11,7 +11,7 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
-class UserController extends Controller
+class TopicController extends Controller
 {
     use ModelForm;
 
@@ -24,8 +24,8 @@ class UserController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('用户');
-            $content->description('已注册用户详情');
+            $content->header('话题');
+            $content->description('话题标签');
 
             $content->body($this->grid());
         });
@@ -71,27 +71,19 @@ class UserController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(User::class, function (Grid $grid) {
+        return Admin::grid(Topic::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->column('name','昵称');
-            $grid->column('email','邮箱');
-            $grid->column('is_active','邮箱验证')->display(function ($is_active){
-                return $is_active ? "是" : "否" ;
-            });
-            $grid->column('questions_count','问题');
-            $grid->column('answers_count','回答');
-            $grid->column('comments_count','评论');
-            $grid->column('favorites_count','收藏');
-            $grid->column('likes_count','点赞');
-            $grid->column('followers_count','被关注');
-            $grid->column('followings_count','关注');
+            $grid->column('name','名称');
+            $grid->column('bio','描述');
+            $grid->column('questions_count','引用');
+            $grid->column('followers_count','关注');
             $grid->created_at();
             $grid->updated_at();
 
             $grid->filter(function ($filter){
-                $filter->like('name','昵称');
-                $filter->like('email','邮箱');
+                $filter->like('name','名字');
+                $filter->like('bio','描述');
             });
         });
     }
@@ -103,19 +95,13 @@ class UserController extends Controller
      */
     protected function form()
     {
-        return Admin::form(User::class, function (Form $form) {
+        return Admin::form(Topic::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->text('name','昵称');
-            $form->email('email','邮箱');
-            $form->display('is_active','邮箱验证');
-            $form->display('questions_count','问题');
-            $form->display('answers_count','回答');
-            $form->display('comments_count','评论');
-            $form->display('favorites_count','收藏');
-            $form->display('likes_count','点赞');
-            $form->display('followers_count','关注者');
-            $form->display('followings_count','关注');
+            $form->text('name','名称');
+            $form->text('bio','描述');
+            $form->number('questions_count','引用');
+            $form->number('followers_count','关注');
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });

@@ -26,3 +26,7 @@ Route::post('questions/{question}/answer','AnswersController@store');
 Route::get('/question/{question}/follow','QuestionFollowController@follow');
 
 Route::get('notifications','NotificationController@index');
+
+Route::get('/user/{user}','UserCenterController@guest');
+
+Route::get('/profile/{user}','UserCenterController@admin');

@@ -26,24 +26,6 @@
                     @endif
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header question_follow">
-                    <h2>{{ $question->followers_count }}</h2>
-                    <span>关注者</span>
-                </div>
-                <div class="card-body row">
-                    <div class="col-md-6">
-                    <question-follow-button question="{{ $question->id }}"></question-follow-button>
-                    </div>
-                    <div class="col-md-6">
-                    <a href="#ueditor" class="btn btn-primary">提交答案</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">
                     {{ $question->answers_count }} answers
@@ -67,59 +49,72 @@
                     @endforeach
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <a><img class="card-img-top" src="{{ $question->user->avatar }}" alt="{{ $question->user->name }}"></a>
-                <div class="card-body">
-                    <h4 class="card-title" style="text-align: center"><b>{{ $question->user->name }}</b></h4>
-                    <div class="user-statics">
-                        <div class="statics-item text-center">
-                            <div class="statics-text">问题</div>
-                            <div class="ststics-count">{{ $question->user->questions_count }}</div>
-                        </div>
-                        <div class="statics-item text-center">
-                            <div class="statics-text">回答</div>
-                            <div class="ststics-count">{{ $question->user->answers_count }}</div>
-                        </div>
-                        <div class="statics-item text-center">
-                            <div class="statics-text">关注者</div>
-                            <div class="ststics-count">{{ $question->user->followers_count }}</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <user-follow-button user="{{ $question->user_id }}"></user-follow-button>
-                        </div>
-                        <div class="col-md-6">
-                            <send-message user="{{ $question->user_id }}"></send-message>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
                     @if(Auth::check())
-                    <form action="/questions/{{ $question->id }}/answer" method="post">
-                        {!! csrf_field() !!}
-                        <div class="form-group">
-                            <script id="ueditor" name="body" type="text/plain"  class="form-control{{ $errors->has('body') ? '  is-invalid' : '' }}" style="width: 100%;height: 200px;" required>
-                                {!! old('body') !!}
-                            </script>
-                            @if ($errors->has('body'))
-                            <span class="invalid-feedback">
-                                <strong>{{ $errors->first('body') }}</strong>
-                                </span>
-                                    @endif
-                        </div>
-                        <button type="submit" class="btn btn-success" style="margin: 10px; float:right">Answer</button>
-                    </form>
+                        <form action="/questions/{{ $question->id }}/answer" method="post">
+                            {!! csrf_field() !!}
+                            <div class="form-group">
+                                <script id="ueditor" name="body" type="text/plain"  class="form-control{{ $errors->has('body') ? '  is-invalid' : '' }}" style="width: 100%;height: 200px;" required>
+                                    {!! old('body') !!}
+                                </script>
+                                @if ($errors->has('body'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('body') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <button type="submit" class="btn btn-success" style="margin: 10px; float:right">Answer</button>
+                        </form>
                     @else
-                          <a href="{{ url('login') }}" class="btn btn-success btn-block">Login to answer</a>
+                        <a href="{{ url('login') }}" class="btn btn-success btn-block">登陆发表</a>
                     @endif
                 </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header question_follow">
+                    <h2>{{ $question->followers_count }}</h2>
+                    <span>关注者</span>
+                </div>
+                <div class="card-body row">
+                    <div class="col-md-6">
+                        <question-follow-button question="{{ $question->id }}"></question-follow-button>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="#ueditor" class="btn btn-primary">提交答案</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                  <a><img class="card-img-top" src="{{ $question->user->avatar }}" alt="{{ $question->user->name }}"></a>
+                  <div class="card-body">
+                       <h4 class="card-title" style="text-align: center"><b>{{ $question->user->name }}</b></h4>
+                       <div class="user-statics">
+                             <div class="statics-item text-center">
+                                  <div class="statics-text">问题</div>
+                                      <div class="ststics-count">{{ $question->user->questions_count }}</div>
+                                  </div>
+                                  <div class="statics-item text-center">
+                                        <div class="statics-text">回答</div>
+                                        <div class="ststics-count">{{ $question->user->answers_count }}</div>
+                                  </div>
+                                  <div class="statics-item text-center">
+                                        <div class="statics-text">关注者</div>
+                                        <div class="ststics-count">{{ $question->user->followers_count }}</div>
+                                  </div>
+                             </div>
+                             <div class="row">
+                                   <div class="col-md-6">
+                                        <user-follow-button user="{{ $question->user_id }}"></user-follow-button>
+                                   </div>
+                                   <div class="col-md-6">
+                                        <send-message user="{{ $question->user_id }}"></send-message>
+                                   </div>
+                             </div>
+                       </div>
+                  </div>
             </div>
         </div>
     </div>
@@ -128,7 +123,7 @@
     <script type="text/javascript">
         var ue = UE.getEditor('ueditor');
         ue.ready(function() {
-            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
+            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
         });
     </script>
 @endsection
