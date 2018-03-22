@@ -23,15 +23,13 @@ class HomeController extends Controller
             $content->row(function (Row $row) {
 
                 $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::environment());
+                    $column->append(view('admin.charts.bar'));
                 });
-
                 $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::extensions());
+                    $column->append(view('admin.charts.line'));
                 });
-
                 $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::dependencies());
+                    $column->append(view('admin.charts.pie'));
                 });
             });
         });

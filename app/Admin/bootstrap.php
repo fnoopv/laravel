@@ -19,9 +19,13 @@
  */
 
 use App\Admin\Extensions\ExpandRow;
+use App\Admin\Extensions\WangEditor;
+use Encore\Admin\Form;
 use Encore\Admin\Grid\Column;
 
 Encore\Admin\Form::forget(['map', 'editor']);
 Admin::css('/admin-css/admin.css');
+Admin::js('/vendor/chartjs/Chart.js');
 
 Column::extend('expand', ExpandRow::class);
+Form::extend('editor', WangEditor::class);

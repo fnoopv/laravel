@@ -10,7 +10,7 @@ namespace App\Admin\Extensions;
 
 use Encore\Admin\Admin;
 use Encore\Admin\Grid\Displayers\AbstractDisplayer;
-class ExpandRow
+class ExpandRow extends AbstractDisplayer
 {
     public function display(\Closure $callback = null, $btn = '')
     {

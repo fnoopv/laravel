@@ -103,6 +103,10 @@ class User extends Authenticatable
         return $this->hasMany(Message::class,'to_user_id');
     }
 
+    public function profiles()
+    {
+        return $this->hasOne(Profile::class);
+    }
     /**
      * @param string $token
      */
@@ -110,6 +114,5 @@ class User extends Authenticatable
     {
         (new UserMailer())->passwordReset($this->email,$token);
     }
-
 
 }

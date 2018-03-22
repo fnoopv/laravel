@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Question;
 
+use App\User;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
@@ -26,8 +27,8 @@ class QuestionController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('帖子');
-            $content->description('已发表的贴子情况');
+            $content->header('问题');
+            $content->description('已提问的问题');
 
             $content->body($this->grid());
         });
@@ -43,8 +44,8 @@ class QuestionController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('问题');
+            $content->description('问题详情');
 
             $content->body($this->form()->edit($id));
         });
@@ -59,8 +60,8 @@ class QuestionController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('添加');
+            $content->description('添加问题');
 
             $content->body($this->form());
         });
@@ -77,10 +78,9 @@ class QuestionController extends Controller
 
             $grid->id('ID')->sortable();
             $grid->column('title','标题')->editable();
-            $grid->column('body','内容')->display(function ($body){
-                return "<a>查看</a>";
+            $grid->column('user_id','发起者')->display(function ($userId){
+                return User::find($userId)->name;
             });
-            $grid->column('user_id','发起者ID');
             $grid->column('comments_count','评论');
             $grid->column('followers_count','关注');
             $grid->column('answers_count','回答');
@@ -100,6 +100,11 @@ class QuestionController extends Controller
             });
             $grid->created_at();
             $grid->updated_at();
+
+            $grid->filter(function ($filter){
+                $filter->like('name','名字');
+                $filter->equal('close_comment','关闭状态');
+            });
         });
     }
 
@@ -114,7 +119,7 @@ class QuestionController extends Controller
 
             $form->display('id', 'ID');
             $form->text('title','标题');
-            $form->textarea('body','内容');
+            $form->editor('body','内容');
             $form->display('user_id','发起者ID');
             $form->display('comments_count','评论');
             $form->display('followers_count','关注');
@@ -127,12 +132,12 @@ class QuestionController extends Controller
                 return ['on'  => ['value' => 1, 'text' => '打开', 'color' => 'success']];
             });
 
-            $form->switch('is_hidden','是否隐藏')->states(function ($hidden){
-                if ($hidden == "0")
+            $form->display('is_hidden','是否隐藏')->with(function ($isHidden){
+                if ($isHidden==0)
                 {
-                    return ['off' => ['value' => 0, 'text' => '关闭', 'color' => 'danger']];
+                    return "否";
                 }
-                return ['on'  => ['value' => 1, 'text' => '打开', 'color' => 'success']];
+                return "是";
             });
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

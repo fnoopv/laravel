@@ -41,8 +41,8 @@ class UserController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('编辑');
+            $content->description('编辑用户信息');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class UserController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('新建');
+            $content->description('新建用户');
 
             $content->body($this->form());
         });
@@ -108,7 +108,19 @@ class UserController extends Controller
             $form->display('id', 'ID');
             $form->text('name','昵称');
             $form->email('email','邮箱');
-            $form->display('is_active','邮箱验证');
+            $form->display('is_active','邮箱验证')->with(function ($isActive){
+                return $isActive ? '是' : '否';
+            });
+            $sex = [
+                1 => '男',
+                2 => '女',
+                3 => '保密'
+            ];
+            $form->slider('profiles.age','年龄')->options(['max' => 100, 'min' => 10, 'step' => 1, 'postfix' => 'years old']);
+            $form->select('profiles.sex','性别')->options($sex);
+            $form->date('profiles.birthday','生日')->format('YYYY-MM-DD');
+            $form->url('profiles.url','个人网站');
+            $form->mobile('profiles.phone','手机号码')->options(['mask' => '999 9999 9999']);
             $form->display('questions_count','问题');
             $form->display('answers_count','回答');
             $form->display('comments_count','评论');

@@ -21,8 +21,8 @@ class CreateQuestionsTable extends Migration
             $table->integer('comments_count')->default(0);
             $table->integer('followers_count')->default(1);
             $table->integer('answers_count')->default(0);
-            $table->integer('close_comment')->default(0);
-            $table->integer('is_hidden')->default(0);
+            $table->smallInteger('close_comment')->default(0);
+            $table->smallInteger('is_hidden')->default(0);
             $table->timestamps();
         });
     }

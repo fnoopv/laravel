@@ -20,8 +20,8 @@ class CreateAnswersTable extends Migration
             $table->text('body');
             $table->integer('votes_count')->default(0);//点赞总数
             $table->integer('comments_count')->default(0);//评论数量
-            $table->integer('is_hidden')->default(0);
-            $table->integer('close_hidden')->default(0);//作者是否关闭
+            $table->smallInteger('is_hidden')->default(0);
+            $table->smallInteger('close_hidden')->default(0);//作者是否关闭
             $table->timestamps();
         });
     }

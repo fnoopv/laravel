@@ -21,7 +21,7 @@ class CreateCommentsTable extends Migration
             $table->string('commentable_type');
             $table->unsignedInteger('parent_id')->nullable();
             $table->smallInteger('level')->default(1);
-            $table->integer('is_hidden')->default(0);
+            $table->smallInteger('is_hidden')->default(0);
             $table->timestamps();
         });
     }

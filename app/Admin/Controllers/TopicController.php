@@ -41,8 +41,8 @@ class TopicController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('编辑');
+            $content->description('编辑话题详情');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class TopicController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('新建');
+            $content->description('新建话题');
 
             $content->body($this->form());
         });
@@ -75,7 +75,9 @@ class TopicController extends Controller
 
             $grid->id('ID')->sortable();
             $grid->column('name','名称');
-            $grid->column('bio','描述');
+            $grid->column('bio','描述')->display(function ($bio){
+                return substr($bio,0,20)."...";
+            });
             $grid->column('questions_count','引用');
             $grid->column('followers_count','关注');
             $grid->created_at();
