@@ -30,3 +30,5 @@ Route::get('notifications','NotificationController@index');
 Route::get('/user/{user}','UserCenterController@guest');
 
 Route::get('/profile/{user}','UserCenterController@admin');
+
+Route::get('/topics','TopicShowController@show');

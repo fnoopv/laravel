@@ -118,5 +118,5 @@
 
         });
     });
-    </script></form>@endsection
+    </script>@endsection
 @endsection

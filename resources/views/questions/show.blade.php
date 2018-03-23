@@ -2,7 +2,7 @@
 
 @section('content')
 @include('vendor.ueditor.assets')
-<div class="container">
+<div class="container" id="top">
     <div class="row">
         <div class="col-md-9">
             <div class="card">
@@ -38,7 +38,7 @@
                             </a>
                             <div class="media-body">
                                 <h4 class="media-heading">
-                                    <a href="/questions/{{ $answer->user->name }}">
+                                    <a href="/user/{{ $answer->user->id }}">
                                         {{ $answer->user->name }}
                                     </a>
                                 </h4>

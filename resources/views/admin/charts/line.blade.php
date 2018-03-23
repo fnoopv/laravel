@@ -1,14 +1,13 @@
 <canvas id="line" width="400" height="400"></canvas>
 <script>
-
     $(function () {
         var jsonData = $.ajax({
             url: 'admin/api/users/line',
             dataType: 'json'
         }).done(function (results) {
             var labels = [] ,data = [];
-            labels = results[0];
-            data = results[1];
+            labels = results.labels;
+            data = results.data;
 
             var tempData = {
                 labels: labels,

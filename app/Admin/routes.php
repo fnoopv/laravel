@@ -19,5 +19,6 @@ Route::group([
     $router->resource('questions', QuestionController::class);
 
     $router->get('api/users/pie','ChartDataController@sex');
-    $router->get('api/users/line','ChartDataController@userUp');
+    $router->get('api/users/line','ChartDataController@userDayUp');
+    $router->get('api/users/bar','ChartDataController@userMonthUp');
 });

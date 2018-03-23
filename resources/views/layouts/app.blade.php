@@ -16,11 +16,22 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top" role="navigation">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 20px;font-weight: 600;color: #2ea8e5;">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                <div>
+                    <ul class="nav navbar-nav navbar-header">
+                        <li style="margin: 0 15px; font-weight: 400; font-size: 16px"><a style="color: #3b4249" href="/">首页</a></li>
+                        <li style="margin: 0 15px; font-weight: 400; font-size: 16px"><a style="color: #3b4249" href="/">发现</a></li>
+                        <li style="margin: 0 15px; font-weight: 400; font-size: 16px"><a style="color: #3b4249" href="/topics">话题</a></li>
+                    </ul>
+                </div>
+                <form class="form-inline my-2 my-lg-0" style="margin-left: 20px">
+                    <input class="form-control mr-sm-3" type="search" placeholder="搜索你感兴趣的内容" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                </form>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,24 +44,24 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <a href="/questions/create" class="btn btn-default">提问</a>
+                        <a href="/questions/create" class="btn btn-default btn-primary" style="font-weight: 400; font-size: 16px; margin-right: 12px">提问</a>
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">登陆</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">注册</a></li>
+                            <li><a class="nav-link" href="{{ route('login') }}" style="font-size: 16px">登陆</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}" style="font-size: 16px">注册</a></li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                     <span style="font-size: 16px;font-weight: 400;">{{ Auth::user()->name }}</span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a href="/profile/{{ Auth::user()->id }}" class="dropdown-item">
+                                    <a href="/profile/{{ Auth::user()->id }}" class="dropdown-item" style="font-size: 16px">
                                         个人中心
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();" style="font-size: 16px">
                                         注销
                                     </a>
 
@@ -69,7 +80,7 @@
             @include('flash::message')
         </div>
 
-        <main class="py-4">
+        <main class="py-4" style="margin-top: 50px;">
             @yield('content')
         </main>
     </div>
