@@ -25,6 +25,7 @@ Vue.component('question-follow-button', require('./components/QuestionFollowButt
 Vue.component('user-follow-button', require('./components/UserFollowButton.vue'));
 Vue.component('user-vote-button', require('./components/UserVoteButton'));
 Vue.component('send-message', require('./components/SendMessage'));
+Vue.component('favorite-question',require('./components/FavoritiesQusetion'));
 
 const app = new Vue({
     el: '#app'

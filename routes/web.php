@@ -27,8 +27,10 @@ Route::get('/question/{question}/follow','QuestionFollowController@follow');
 
 Route::get('notifications','NotificationController@index');
 
-Route::get('/user/{user}','UserCenterController@guest');
+Route::get('/user/{user}','ProfileController@guest');
 
-Route::get('/profile/{user}','UserCenterController@admin');
+Route::get('/profile/{user}','ProfileController@admin');
 
 Route::get('/topics','TopicShowController@show');
+
+Route::get('/test','TestController@index');

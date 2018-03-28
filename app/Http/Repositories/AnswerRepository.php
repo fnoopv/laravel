@@ -10,6 +10,7 @@ namespace App\Http\Repositories;
 
 
 use App\Answer;
+use App\Question;
 
 class AnswerRepository
 {

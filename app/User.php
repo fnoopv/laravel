@@ -6,6 +6,7 @@ use App\Mailer\UserMailer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Naux\Mail\SendCloudTemplate;
 use Mail;
 
@@ -107,6 +108,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Question::class,'favorites','user_id','question_id')
+                    ->withTimestamps();
+    }
     /**
      * @param string $token
      */
@@ -115,4 +122,20 @@ class User extends Authenticatable
         (new UserMailer())->passwordReset($this->email,$token);
     }
 
+
+    public function getQuestion($user)
+    {
+        $question = array_unique(Answer::where('user_id','=',$user)->pluck('question_id')->toArray());
+        $questionId = array();
+        foreach ($question as $key => $value)
+        {
+            array_push($questionId,$value);
+        }
+        $use = array();
+        for ($i=0;$i< count($questionId);$i++)
+        {
+            array_push($use,Question::where('id','=',$questionId[$i])->get());
+        }
+        return $use;
+    }
 }

@@ -9,6 +9,8 @@
 namespace App\Http\Repositories;
 
 
+use App\Answer;
+use App\Question;
 use App\User;
 
 class UserRepository
@@ -17,4 +19,5 @@ class UserRepository
     {
         return User::find($id);
     }
+
 }
