@@ -34,3 +34,5 @@ Route::get('/profile/{user}','ProfileController@admin');
 Route::get('/topics','TopicShowController@show');
 
 Route::get('/test','TestController@index');
+
+Route::get('profile/questions/{id}','QuestionsController@show');

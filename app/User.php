@@ -138,4 +138,15 @@ class User extends Authenticatable
         }
         return $use;
     }
+
+    public function getFollowings($user)
+    {
+        $user = User::find($user)->followersUser()->where('follower_id','=',$user)->pluck('followed_id');
+        $users = array();
+        for ($i=0;$i<count($user);$i++)
+        {
+            array_push($users,User::where('id','=',$user[$i])->get());
+        }
+        return $users;
+    }
 }

@@ -17,11 +17,11 @@
                 </div>
                 <div class="actions">
                     @if(Auth::check() && Auth::user()->owns($question))
-                        <span class="card-link"><a href="/questions/{{ $question->id }}/edit">Edit</a></span>
+                        <span class="card-link"><a href="/questions/{{ $question->id }}/edit">编辑</a></span>
                         <form action="/questions/{{ $question->id }}" method="post" class="delete-form card-text">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
-                            <button class="button is-naked delete-button card-link">Delete</button>
+                            <button class="button is-naked delete-button card-link">删除</button>
                         </form>
                     @endif
                 </div>
@@ -64,7 +64,7 @@
                                     </span>
                                 @endif
                             </div>
-                            <button type="submit" class="btn btn-success" style="margin: 10px; float:right">Answer</button>
+                            <button type="submit" class="btn btn-success" style="margin: 10px; float:right">提交</button>
                         </form>
                     @else
                         <a href="{{ url('login') }}" class="btn btn-success btn-block">登陆发表</a>

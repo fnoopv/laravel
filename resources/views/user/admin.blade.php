@@ -52,7 +52,7 @@
                                 <div class="actions">
                                     @if(Auth::check() && Auth::user()->owns($question))
                                         <button class="card-link btn"><a href="/questions/{{ $question->id }}/edit">编辑</a></button>
-                                        <form action="/questions/{{ $question->id }}" method="post" class="delete-form card-text">
+                                        <form action="questions/{{ $question->id }}" method="post" class="delete-form card-text">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
                                             <button class="btn card-link btn-danger">删除</button>
@@ -81,6 +81,15 @@
                     <div class="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
                         <span style="font-weight: 600">我关注的人</span>
                         <hr>
+                        @foreach($public->getFollowings($public->id) as $following)
+                            @foreach($following as $follow)
+                                <div>
+                                    <img width="48" src="{{ $follow->avatar }}" alt="{{ $follow->name }}">
+                                    <a href="#" style="font-size: 18px;font-weight: bold;">{{ $follow->name }}</a>
+                                    <hr>
+                                </div>
+                            @endforeach
+                        @endforeach
                     </div>
                     <div class="tab-pane fade" id="follower" role="tabpanel" aria-labelledby="follower-tab">
                         <span style="font-weight: 600">关注我的人</span>

@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use App\Favorite;
+use App\Follow;
 use App\Question;
 use App\User;
 
@@ -32,24 +33,12 @@ class TestController
      */
     public function index()
     {
-        $question = array_unique(Answer::where('user_id','=',5)->pluck('question_id')->toArray());
-        $questionId = array();
-        foreach ($question as $key => $value)
+        $user = User::find(5)->followersUser()->where('follower_id','=',5)->pluck('followed_id');
+        $users = array();
+        for ($i=0;$i<count($user);$i++)
         {
-            array_push($questionId,$value);
+            array_push($users,User::where('id','=',$user[$i])->get());
         }
-        $use = array();
-        for ($i=0;$i<count($questionId);$i++)
-        {
-            array_push($use,Question::where('id','=',$questionId[$i])->get());
-        }
-        foreach ($use as $value)
-        {
-            foreach ($value as $item)
-            {
-                echo $item->id;
-            }
-        }
-//        return $use[1];
+        return $users;
     }
 }
