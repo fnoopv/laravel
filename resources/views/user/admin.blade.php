@@ -35,6 +35,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="favorite-tab" href="#favorite" data-toggle="tab" aria-selected="false">我的收藏</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="topic-tab" href="#topic" data-toggle="tab" aria-selected="false">关注的话题</a>
+                    </li>
                 </ul>
                 <hr>
                 <div class="tab-content" id="myTabContent">
@@ -69,7 +72,7 @@
                             @foreach($questions as $question)
                                 <div class="card" style="margin-bottom: 1rem">
                                     <div class="card-header">
-                                        <a href="questions/{{ $question->id }}">{{ $question->title }}</a>
+                                        <a href="/questions/{{ $question->id }}">{{ $question->title }}</a>
                                     </div>
                                     <div class="card-body">
                                         <p>{!! $question->body !!}</p>
@@ -85,7 +88,7 @@
                             @foreach($following as $follow)
                                 <div>
                                     <img width="48" src="{{ $follow->avatar }}" alt="{{ $follow->name }}">
-                                    <a href="#" style="font-size: 18px;font-weight: bold;">{{ $follow->name }}</a>
+                                    <a href="/user/{{ $follow->id }}" style="font-size: 18px;font-weight: bold;">{{ $follow->name }}</a>
                                     <hr>
                                 </div>
                             @endforeach
@@ -94,9 +97,35 @@
                     <div class="tab-pane fade" id="follower" role="tabpanel" aria-labelledby="follower-tab">
                         <span style="font-weight: 600">关注我的人</span>
                         <hr>
+                        @foreach($public->getFollowers($public->id) as $following)
+                            @foreach($following as $follow)
+                                <div>
+                                    <img width="48" src="{{ $follow->avatar }}" alt="{{ $follow->name }}">
+                                    <a href="/user/{{ $follow->id }}" style="font-size: 18px;font-weight: bold;">{{ $follow->name }}</a>
+                                    <hr>
+                                </div>
+                            @endforeach
+                        @endforeach
                     </div>
                     <div class="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
                         <span style="font-weight: 600">我的收藏</span>
+                        <hr>
+                        @foreach($public->getFavorites() as $favorites)
+                            @foreach($favorites as $favorite)
+                                <div class="card" style="margin-bottom: 1rem">
+                                    <div class="card-header">
+                                        <a href="/questions/{{ $favorite->id }}" style="font-weight: bold;font-size: 20px;">{{ $favorite->title }}</a>
+                                        <favorite-question question="{{ $favorite->id }}" class="pull-right"></favorite-question>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>{!! $favorite->body !!}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endforeach
+                    </div>
+                    <div class="tab-pane fade" id="topic" role="tabpanel" aria-labelledby="topic-tab">
+                        <span style="font-weight: 600">关注的话题</span>
                         <hr>
                     </div>
                 </div>

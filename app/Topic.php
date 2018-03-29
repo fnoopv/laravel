@@ -12,4 +12,9 @@ class Topic extends Model
     {
     	return $this->belongsToMany(Question::class)->withTimestamps();
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'favorite_topics')->withTimestamps();
+    }
 }

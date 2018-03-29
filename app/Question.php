@@ -40,9 +40,9 @@ class Question extends Model
         return $this->morphMany('App\Comment','commentable');
     }
 
-    public function getQuestionCount($id)
+    public function getQuestionCount($question)
     {
-        return Answer::where('question_id','=',$id)->count();
+        return Answer::where('question_id','=',$question)->count();
     }
 
 }

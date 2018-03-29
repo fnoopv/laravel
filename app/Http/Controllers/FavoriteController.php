@@ -43,9 +43,11 @@ class FavoriteController extends Controller
         if (count($results['attached']) > 0)
         {
             $userToFavorite->increment('favorites_count');
+            Auth::guard('api')->user()->increment('favorites_count');
             return response()->json(['favorited' => true]);
         }
         $userToFavorite->decrement('favorites_count');
+        Auth::guard('api')->user()->decrement('favorites_count');
         return response()->json(['favorited' => false]);
     }
 }

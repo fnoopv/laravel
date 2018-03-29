@@ -114,6 +114,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Question::class,'favorites','user_id','question_id')
                     ->withTimestamps();
     }
+
+    public function topics()
+    {
+        return $this->belongsToMany(Topic::class,'favorite_topics')->withTimestamps();
+    }
     /**
      * @param string $token
      */
@@ -148,5 +153,30 @@ class User extends Authenticatable
             array_push($users,User::where('id','=',$user[$i])->get());
         }
         return $users;
+    }
+
+    public function getFollowers($user)
+    {
+        $user = User::find($user)->followersUser()->where('followed_id','=',$user)->pluck('follower_id');
+        $users = array();
+        for ($i=0;$i<count($user);$i++)
+        {
+            array_push($users,User::where('id','=',$user[$i])->get());
+        }
+
+        return $users;
+    }
+
+    public function getFavorites()
+    {
+        $user=Auth::id();
+        $result = Favorite::where('user_id','=',$user)->pluck('question_id');
+        $question = array();
+        for ($i=0;$i<count($result);$i++)
+        {
+            array_push($question,Question::where('id','=',$result[$i])->get());
+        }
+
+        return $question;
     }
 }

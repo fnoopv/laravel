@@ -31,8 +31,17 @@ Route::get('/user/{user}','ProfileController@guest');
 
 Route::get('/profile/{user}','ProfileController@admin');
 
-Route::get('/topics','TopicShowController@show');
+Route::get('/topics',[
+    'as' => 'topics',
+    'uses' => 'TopicShowController@index'
+]);
+
+Route::get('/topic/{topic}','TopicShowController@show');
+
+Route::get('/topic/edit/{topic}','TopicShowController@edit');
+
+Route::patch('/topic/{topic}/update','TopicShowController@update');
+
+
 
 Route::get('/test','TestController@index');
-
-Route::get('profile/questions/{id}','QuestionsController@show');
