@@ -19,7 +19,7 @@
                                 <a href="/questions/{{ $question->id }}" style="font-weight: bold;color: black">{{ $question->title }}</a>
                                 <question-follow-button class="float-right" question="{{ $question->id }}"></question-follow-button>
                             </h5>
-                            <p class="card-text">{!! $question->body !!}</p>
+                            <p class="card-text">{!! html_entity_decode($question->body) !!}</p>
                             <div>
                                 <span>{{ $question->getQuestionCount($question->id) }} 条评论</span>
                                 <span style="margin-left: 20px">

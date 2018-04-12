@@ -41,12 +41,15 @@ class QuestionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreQuestionRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreQuestionRequest $request)
     {
-        $topics = $this->question->nomallizeTopic($request->get('topics'));
+        if (!is_null($request->get('topics')))
+        {
+            $topics = $this->question->nomallizeTopic($request->get('topics'));
+        }
         $data = [
             'title' => $request->get('title'),
             'body' => $request->get('body'),
