@@ -6,14 +6,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">New Problem</div>
+                <div class="card-header">发表问题</div>
 
                 <div class="card-body">
                     <form action="/questions" method="post">
                         {!! csrf_field() !!}
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" name="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" value="{{ old('title') }}" placeholder="Title" id="title" required></input>
+                            <input type="text" name="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" value="{{ old('title') }}" placeholder="标题" id="title" required></input>
                             @if ($errors->has('title'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('title') }}</strong>
@@ -34,7 +34,7 @@
                                     </span>
                             @endif
                         </div>
-                        <button type="submit" class="btn btn-success" style="margin: 10px; float:right">Submit</button>
+                        <button type="submit" class="btn btn-success" style="margin: 10px; float:right">发表</button>
                     </form>
                 </div>
             </div>
