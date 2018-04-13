@@ -34,7 +34,9 @@
     php artisan migrate
     ```  
 7. 后台数据发布  
-    php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
+    ```
+    php artisan admin:install
+    ```
 8. 邮件发送服务使用的是[SendCloud](https://sendcloud.sohu.com/)提供的服务，注册后填写`.env`如下两项  
     ```
     SEND_CLOUD_USER=  
