@@ -31,6 +31,10 @@ Route::get('/user/{user}','ProfileController@guest');
 
 Route::get('/profile/{user}','ProfileController@admin');
 
+Route::get('/profile/edit/{user}','ProfileController@edit');
+
+Route::get('/profile/update','ProfileController@update');
+
 Route::get('/topics',[
     'as' => 'topics',
     'uses' => 'TopicShowController@index'

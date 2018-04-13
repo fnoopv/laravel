@@ -33,7 +33,7 @@
     ```
     php artisan migrate
     ```  
-7. 后台数据发布  
+7. admin默认数据写入  
     ```
     php artisan admin:install
     ```
@@ -42,4 +42,11 @@
     SEND_CLOUD_USER=  
     SEND_CLOUD_KEY=  
     ```  
-9. 如无意外就可以正常使用了
+9. 如无意外就可以正常使用了  
+***
+## 说明
+1. 后台模块  
+    后台登陆地址为domain.com/admin  
+    初始登陆账号/密码为:admin/admin  
+2.   
+***

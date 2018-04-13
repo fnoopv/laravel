@@ -13,7 +13,11 @@
                         <h5>暂无简介....</h5>
                     </div>
                     <div style="display: block;" class="pull-right">
-                        <button class="btn btn-default pull-right" style="display: inline-block;margin-top: 3rem;margin-right: 1rem">编辑个人资料</button>
+                        <a
+                                class="btn btn-default pull-right"
+                                style="display: inline-block;margin-top: 3rem;margin-right: 1rem;border: 1px solid green"
+                                href="/profile/edit/{{ Auth::id() }}"
+                        >编辑个人资料</a>
                     </div>
                 </div>
             </div>
