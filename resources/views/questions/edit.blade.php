@@ -13,7 +13,7 @@
                             {{ method_field('PATCH') }}
                             {!! csrf_field() !!}
                             <div class="form-group">
-                                <label for="title">Title</label>
+                                <label for="title">标题</label>
                                 <input type="text" name="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" value="{{ $question->title }}" placeholder="Title" id="title" required></input>
                                 @if ($errors->has('title'))
                                     <span class="invalid-feedback">
@@ -38,7 +38,7 @@
                                     </span>
                                         @endif
                                     </div>
-                                    <button type="submit" class="btn btn-success" style="margin: 10px;float:right">Submit</button>
+                                    <button type="submit" class="btn btn-success" style="margin: 10px;float:right">提交</button>
                                     </form>
                                     </div>
                                     </div>

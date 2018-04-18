@@ -29,30 +29,35 @@ class ProfileController extends Controller
         return view('user/edit',compact('user'));
     }
 
-    public function update(Request $request)
+    /**
+     * @param Request $request
+     * @param $user
+     * @return string
+     */
+    public function update(Request $request, $user)
     {
-        $date = $request->get('birthday');
-        $datas = [
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
+        if (strlen($request->get('phone')) == 11)
+        {
+            $phone = substr($request->get('phone'),0,3)." ".substr($request->get('phone'),3,4)." ".substr($request->get('phone'),7,4);
+        }else {
+            $phone = $request->get('phone');
+        }
+        $data = [
             'sex' => $request->get('sex'),
             'age' => $request->get('age'),
-            'birthday' => ,
+            'birthday' => $request->get('birthday'),
             'url' => $request->get('url'),
             'sign' => $request->get('sign'),
-            'phone' => $request->get('phone')
+            'phone' => $phone
         ];
-        foreach ($datas as $data)
-        {
-            if (empty($data))
-            {
-                unset($data);
-            }
-        }
-        $status = Profile::where('user_id',"=",Auth::id())->update($datas);
-        if ($status)
-        {
-            return "hello";
-        }
+        $userToUpdate = User::all()->find($user);
+        $userToUpdate->profiles()->update($data);
+        $userToUpdate->update([
+            'name' => $request->get('name'),
+            'email' => $request->get('email')
+        ]);
+
+        flash('修改成功')->success();
+        return back();
     }
 }

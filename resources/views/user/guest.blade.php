@@ -15,7 +15,7 @@
                                 {{ $user->name }}
                                 <user-follow-button user="{{ $user->id }}" class="float-right" style="margin-right: 10px;"></user-follow-button>
                             </h5>
-                            <p>个人简介</p>
+                            <p style="color: #007bff">{{ $user->profiles->sign }}</p>
                         </div>
                     </div>
                     <div class="user-statics row">

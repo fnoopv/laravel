@@ -73,6 +73,14 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'api_token' => str_random(64)
         ]);
+        $user->profiles()->create([
+            'user_id' => $user->id,
+            'sex' => "",
+            'age' => "",
+            "url" => "",
+            'phone' => "",
+            'sign' => ""
+        ]);
         $this->sendVerifyEmailTo($user);
 
         return $user;

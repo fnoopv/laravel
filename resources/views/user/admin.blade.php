@@ -10,7 +10,7 @@
                     <img class="mr-3 rounded-circle" width="168" src="{{ $public->avatar  }}" alt="{{ $public->name }}" style="margin-top: -75px;margin-left: 1rem">
                     <div class="media-body" style="margin-top: 20px;margin-bottom: 20px;">
                         <h2>{{ $public->name }}</h2>
-                        <h5>暂无简介....</h5>
+                        <h5 style="color: #007bff">{{ $public->profiles->sign or "这个人很懒....." }}</h5>
                     </div>
                     <div style="display: block;" class="pull-right">
                         <a
@@ -41,6 +41,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="topic-tab" href="#topic" data-toggle="tab" aria-selected="false">关注的话题</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="notice-tab" href="#notice" data-toggle="tab" aria-selected="false">系统通知</a>
                     </li>
                 </ul>
                 <hr>
@@ -131,6 +134,19 @@
                     <div class="tab-pane fade" id="topic" role="tabpanel" aria-labelledby="topic-tab">
                         <span style="font-weight: 600">关注的话题</span>
                         <hr>
+                    </div>
+                    <div class="tab-pane fade" id="notice" role="tabpanel" aria-labelledby="notice-tab">
+                        <span style="font-weight: 600">消息通知</span>
+                        <hr>
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        @foreach($public->notifications as $notification)
+                            @include('notifications.'.snake_case(class_basename($notification->type)))
+                        @endforeach
                     </div>
                 </div>
             </div>

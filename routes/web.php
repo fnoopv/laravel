@@ -33,7 +33,7 @@ Route::get('/profile/{user}','ProfileController@admin');
 
 Route::get('/profile/edit/{user}','ProfileController@edit');
 
-Route::get('/profile/update','ProfileController@update');
+Route::patch('/profile/update/{user}','ProfileController@update');
 
 Route::get('/topics',[
     'as' => 'topics',
@@ -46,6 +46,7 @@ Route::get('/topic/edit/{topic}','TopicShowController@edit');
 
 Route::patch('/topic/{topic}/update','TopicShowController@update');
 
-
+Route::get('discover','DiscoverController@index');
 
 Route::get('/test','TestController@index');
+Route::get('/test/store','TestController@show');

@@ -10,7 +10,7 @@
                 <img class="mr-3 rounded-circle" width="168" src="{{ $user->avatar  }}" alt="{{ $user->name }}" style="margin-top: -75px;margin-left: 1rem">
                 <div class="media-body" style="margin-top: 20px;margin-bottom: 20px;">
                     <h2>{{ $user->name }}</h2>
-                    <h5>暂无简介....</h5>
+                    <h5>{{ $user->profiles->sign }}</h5>
                 </div>
                 <div style="display: block;" class="pull-right">
                     <a
@@ -25,16 +25,17 @@
             <div class="col-md-8" style="background-color: white;margin-right: 0.5rem">
                 <h3 style="padding-top: 1rem">编辑个人资料</h3>
                 <hr>
-                <form action="/profile/update" method="post">
-                    {{ csrf_field() }}
+                @include('flash::message')
+                <form action="/profile/update/{{ $user->id }}" method="post">
+                    {!! csrf_field() !!}
                     {{ method_field('Patch') }}
                     <div class="form-group">
                         <label for="email">邮箱</label>
-                        <input class="form-control" type="email" placeholder="{{ $user->email }}" id="email" name="email" readonly>
+                        <input class="form-control" type="email" value="{{ $user->email }}" id="email" name="email" readonly>
                     </div>
                     <div class="form-group">
                         <label for="name">用户名</label>
-                        <input type="text" class="form-control" placeholder="{{ $user->name }}" id="name" name="name">
+                        <input type="text" class="form-control" value="{{ $user->name }}" id="name" name="name">
                     </div>
                     <div class="form-group">
                         <label for="sex">性别</label>
@@ -50,23 +51,23 @@
                     {{--</div>--}}
                     <div class="form-group">
                         <label for="age">年龄</label>
-                        <input type="number" placeholder="{{ $user->profiles->age }}" class="form-control" id="age" name="age">
+                        <input type="number" value="{{ $user->profiles->age }}" class="form-control" id="age" name="age">
                     </div>
                     <div class="form-group">
                         <label for="birthday">生日</label>
-                        <input type="date" id="birthday" placeholder="{{ $user->profiles->birthday }}" class="form-control" name="birthday">
+                        <input type="date" id="birthday" value="{{ $user->profiles->birthday }}" class="form-control" name="birthday">
                     </div>
                     <div class="form-group">
                         <label for="url">个人网站</label>
-                        <input type="text" id="url" class="form-control" placeholder="{{ $user->profiles->url }}" name="url">
+                        <input type="text" id="url" class="form-control" value="{{ $user->profiles->url }}" name="url">
                     </div>
                     <div class="form-group">
                         <label for="phone">电话(11位)</label>
-                        <input type="number" id="phone" name="phone" class="form-control" placeholder="{{ $user->profiles->phone }}" maxlength="11">
+                        <input type="tel" id="phone" name="phone" class="form-control" value="{{ $user->profiles->phone }}" maxlength="11">
                     </div>
                     <div class="form-group">
                         <label for="sign">个人签名</label>
-                        <input type="text" class="form-control" id="sign" name="sign" placeholder="{{ $user->profiles->sign }}">
+                        <input type="text" class="form-control" id="sign" name="sign" value="{{ $user->profiles->sign }}">
                     </div>
                     <div class="form-group"></div>
                     <input type="submit" value="提交" class="btn btn-default btn-primary pull-right" style="margin-bottom: 1rem">

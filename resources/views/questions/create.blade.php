@@ -12,7 +12,7 @@
                     <form action="/questions" method="post">
                         {!! csrf_field() !!}
                         <div class="form-group">
-                            <label for="title">Title</label>
+                            <label for="title">标题</label>
                             <input type="text" name="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" value="{{ old('title') }}" placeholder="标题" id="title" required></input>
                             @if ($errors->has('title'))
                                     <span class="invalid-feedback">

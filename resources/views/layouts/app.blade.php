@@ -24,14 +24,20 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <div>
-                    <ul class="nav navbar-nav navbar-header">
-                        <li style="margin: 0 15px; font-weight: 400; font-size: 16px"><a style="color: #3b4249" href="/">首页</a></li>
-                        <li style="margin: 0 15px; font-weight: 400; font-size: 16px"><a style="color: #3b4249" href="/">发现</a></li>
-                        <li style="margin: 0 15px; font-weight: 400; font-size: 16px"><a style="color: #3b4249" href="/topics">话题</a></li>
+                    <ul class="nav nav-pills">
+                        <li style="margin: 0 15px; font-weight: 400; font-size: 16px" class="nav-item">
+                            <a style="color: #3b4249" href="/">首页</a>
+                        </li>
+                        <li style="margin: 0 15px; font-weight: 400; font-size: 16px" class="nav-item">
+                            <a style="color: #3b4249" href="/discover">发现</a>
+                        </li>
+                        <li style="margin: 0 15px; font-weight: 400; font-size: 16px" class="nav-item">
+                            <a style="color: #3b4249" href="/topics">话题</a>
+                        </li>
                     </ul>
                 </div>
                 <form class="form-inline my-2 my-lg-0" style="margin-left: 20px">
-                    <input class="form-control mr-sm-3" type="search" placeholder="搜索你感兴趣的内容" aria-label="Search">
+                    <input class="form-control mr-sm-3" type="search" placeholder="搜索用户 话题 文章" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
                 </form>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
