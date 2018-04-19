@@ -50035,8 +50035,8 @@ var render = function() {
   return _c("button", {
     staticClass: "btn btn-default",
     class: { "btn-success": _vm.followed },
-    attrs: { onclick: _vm.follow },
-    domProps: { textContent: _vm._s(_vm.text) }
+    domProps: { textContent: _vm._s(_vm.text) },
+    on: { click: _vm.follow }
   })
 }
 var staticRenderFns = []

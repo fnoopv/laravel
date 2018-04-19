@@ -3,7 +3,7 @@
             class="btn btn-default"
             v-bind:class="{'btn-success':followed}"
             v-text="text"
-            v-bind:onclick="follow"
+            v-on:click="follow"
     ></button>
 </template>
 

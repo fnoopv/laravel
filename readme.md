@@ -33,9 +33,10 @@
     ```
     php artisan migrate
     ```  
-7. admin默认数据写入  
+7. admin数据写入  
     ```
     php artisan admin:install
+    php artisan db:seed
     ```
 8. 邮件发送服务使用的是[SendCloud](https://sendcloud.sohu.com/)提供的服务，注册后填写`.env`如下两项  
     ```
