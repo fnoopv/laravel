@@ -40,6 +40,8 @@ Route::get('/topics',[
     'uses' => 'TopicShowController@index'
 ]);
 
+Route::get('/mailVerify','EmailController@toVerify');
+
 Route::get('/topic/{topic}','TopicShowController@show');
 
 Route::get('/topic/edit/{topic}','TopicShowController@edit');
