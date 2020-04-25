@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('avatar');//头像
+            $table->string('avatar')->default('/images/avatars/default.png');//头像
             $table->string('confirmation_token');
             $table->smallInteger('is_active')->default(0);//邮箱是否激活
             $table->integer('questions_count')->default(0);//问题数

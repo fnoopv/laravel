@@ -3,7 +3,7 @@
 
     $(function () {
         var jsonData = $.ajax({
-            url: 'admin/api/users/bar',
+            url: 'api/users/bar',
             dataType: 'json'
         }).done(function (results) {
             var labels = results.labels;

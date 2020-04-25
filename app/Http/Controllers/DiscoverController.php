@@ -23,7 +23,7 @@ class DiscoverController extends Controller
 
             return view('questions.discover',compact('questions'));
         }else{
-            $questions =  Question::all()->published()->get();
+            $questions =  Question::published()->get();
             return view('questions.discover',compact('questions'));
         }
     }

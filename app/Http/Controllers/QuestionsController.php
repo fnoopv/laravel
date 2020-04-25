@@ -7,6 +7,7 @@ use App\Topic;
 use Auth;
 use App\Question;
 use App\Http\Requests\StoreQuestionRequest;
+use Illuminate\Http\Response;
 
 class QuestionsController extends Controller
 {
@@ -20,7 +21,7 @@ class QuestionsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -31,7 +32,7 @@ class QuestionsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function create()
     {
@@ -42,14 +43,11 @@ class QuestionsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreQuestionRequest $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(StoreQuestionRequest $request)
     {
-        if (!is_null($request->get('topics')))
-        {
-            $topics = $this->question->nomallizeTopic($request->get('topics'));
-        }
+        $topics = $this->question->nomallizeTopic($request->get('topics'));
         $data = [
             'title' => $request->get('title'),
             'body' => $request->get('body'),
@@ -67,7 +65,7 @@ class QuestionsController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -79,7 +77,7 @@ class QuestionsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -96,7 +94,7 @@ class QuestionsController extends Controller
      *
      * @param StoreQuestionRequest $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(StoreQuestionRequest $request, $id)
     {
@@ -117,7 +115,7 @@ class QuestionsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

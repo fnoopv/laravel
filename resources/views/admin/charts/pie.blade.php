@@ -2,7 +2,7 @@
 <script>
     $(function () {
         var jsonData = $.ajax({
-            url: 'admin/api/users/pie',
+            url: 'api/users/pie',
             dataType: 'json',
         }).done(function (results) {
 

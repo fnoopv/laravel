@@ -50,13 +50,6 @@ class HomeController extends Controller
                     $column->append(view('admin.charts.pie'));
                 });
             });
-
-            $content->row(function (Row $row){
-                $row->column(12,'<h3 style="font-weight: 600;border-bottom: #8a6d3b 5px solid;">问题数据</h3>');
-                $row->column(4,function (Column $column){
-                    $column->append(view('admin.charts.count'));
-                });
-            });
         });
     }
 }

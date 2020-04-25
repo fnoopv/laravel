@@ -12,7 +12,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/buttons.css') }}" rel="stylesheet">
-    <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('style')
 </head>
@@ -87,15 +86,12 @@
         <div class="container" style="text-align: center;">
             @include('flash::message')
         </div>
-
-        <main class="py-4" style="margin-top: 50px;">
-            @yield('content')
-        </main>
+        @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
+    @include('vendor.ueditor.assets')
     @yield('js')
     <script>
         $('#flash-overlay-modal').modal();

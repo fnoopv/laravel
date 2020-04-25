@@ -20,7 +20,8 @@
 
         data() {
             return {
-                voted:false
+                voted:false,
+                count: this.count
             }
         },
 

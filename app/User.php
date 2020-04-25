@@ -10,6 +10,68 @@ use Illuminate\Support\Facades\Auth;
 use Naux\Mail\SendCloudTemplate;
 use Mail;
 
+/**
+ * App\User
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string $avatar
+ * @property string $confirmation_token
+ * @property int $is_active
+ * @property int $questions_count
+ * @property-read int|null $answers_count
+ * @property int $comments_count
+ * @property-read int|null $favorites_count
+ * @property int $likes_count
+ * @property-read int|null $followers_count
+ * @property int $followings_count
+ * @property mixed|null $settings
+ * @property string $api_token
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Answer[] $answers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Question[] $favorites
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $followers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $followersUser
+ * @property-read int|null $followers_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Question[] $follows
+ * @property-read int|null $follows_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Message[] $messages
+ * @property-read int|null $messages_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \App\Profile|null $profiles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Topic[] $topics
+ * @property-read int|null $topics_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Answer[] $votes
+ * @property-read int|null $votes_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAnswersCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereApiToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCommentsCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmationToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFavoritesCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFollowersCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFollowingsCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLikesCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereQuestionsCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereSettings($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable
 {
     use Notifiable;

@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('vendor.ueditor.assets')
-<div class="container" id="top">
+<div class="container" id="top" style="margin-top: 5rem">
     <div class="row">
         <div class="col-md-9">
             <div class="card">
@@ -55,7 +54,8 @@
                         <form action="/questions/{{ $question->id }}/answer" method="post">
                             {!! csrf_field() !!}
                             <div class="form-group">
-                                <script id="ueditor" name="body" type="text/plain"  class="form-control{{ $errors->has('body') ? '  is-invalid' : '' }}" style="width: 100%;height: 200px;" required>
+                                <label for="ueditor">添加答案</label>
+                                <script id="ueditor" name="body" type="text/plain"  class="{{ $errors->has('body') ? '  is-invalid' : '' }}" style="width: 100%;" required>
                                     {!! old('body') !!}
                                 </script>
                                 @if ($errors->has('body'))

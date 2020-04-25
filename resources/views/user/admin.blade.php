@@ -62,10 +62,10 @@
                                 <div class="actions">
                                     @if(Auth::check() && Auth::user()->owns($question))
                                         <button class="card-link btn"><a href="/questions/{{ $question->id }}/edit">编辑</a></button>
-                                        <form action="questions/{{ $question->id }}" method="post" class="delete-form card-text">
+                                        <form action="/questions/{{ $question->id }}" method="post" class="delete-form card-text">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <button class="btn card-link btn-danger">删除</button>
+                                            <button type="submit" class="btn card-link btn-danger">删除</button>
                                         </form>
                                     @endif
                                 </div>

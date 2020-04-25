@@ -2,7 +2,7 @@
 <script>
     $(function () {
         var jsonData = $.ajax({
-            url: 'admin/api/users/line',
+            url: 'api/users/line',
             dataType: 'json'
         }).done(function (results) {
             var labels = [] ,data = [];

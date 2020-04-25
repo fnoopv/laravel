@@ -2,8 +2,10 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+
 
 class Question extends Model
 {
@@ -20,6 +22,10 @@ class Question extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
     public function scopePublished($query)
     {
         return $query->where('is_hidden',0);

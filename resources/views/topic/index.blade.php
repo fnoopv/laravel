@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="margin-top: 5rem">
         <div>
             <h3 style="font-weight: bold">已关注的话题</h3>
             <hr>
         </div>
         @if(empty($topics))
-            <h4>还没有关注话题，快去关注话题吧</h4>
+            <div style="margin-top: 1rem">
+                <h4>还没有关注话题，快去关注话题吧</h4>
+            </div>
         @else
             @foreach($topics as $topic)
                 <a href="/topic/{{ $topic->id }}" style="font-weight: bold;margin-top: 1rem" class="btn btn-primary">{{ $topic->name }}</a>

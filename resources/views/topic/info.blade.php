@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="margin-top: 5rem">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div style="background-color: white;padding: 1rem">
-                    <h3 style="font-weight: bold">{{ $topic->name }}</h3>
-                    <p>{!! $topic->bio !!}</p>
+                    <h3 style="font-weight: bold">{{ $topics->name }}</h3>
+                    <p>{!! $topics->bio !!}</p>
                     <hr>
                     @foreach($questions as $question)
                         @if($question != null)

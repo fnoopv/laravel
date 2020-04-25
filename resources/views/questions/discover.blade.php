@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top: 5rem">
         <div class="row">
             <div class="col-md-8">
                 @foreach($questions as $question)

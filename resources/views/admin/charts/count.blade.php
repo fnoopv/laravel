@@ -2,11 +2,11 @@
     <caption>数据统计</caption>
     <tbody>
     <tr>
-        <td>总人数</td>
-        <td>Bangalore</td>
+        <td>问题总数</td>
+        <td></td>
     </tr>
     <tr>
-        <td>Sachin</td>
+        <td></td>
         <td>Mumbai</td>
     </tr>
     </tbody>

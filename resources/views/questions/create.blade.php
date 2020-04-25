@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('vendor.ueditor.assets')
-<div class="container">
+<div class="container" style="margin-top: 5rem">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -13,7 +12,7 @@
                         {!! csrf_field() !!}
                         <div class="form-group">
                             <label for="title">标题</label>
-                            <input type="text" name="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" value="{{ old('title') }}" placeholder="标题" id="title" required></input>
+                            <input type="text" name="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" value="{{ old('title') }}" placeholder="标题" id="title" required />
                             @if ($errors->has('title'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('title') }}</strong>
@@ -25,7 +24,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <script id="ueditor" name="body" type="text/plain"  class="form-control{{ $errors->has('body') ? '  is-invalid' : '' }}" style="width: 100%;height: 100%;" required>
+                            <lable for="ueditor">问题内容</lable>
+                            <script id="ueditor" name="body" type="text/plain"  class="{{ $errors->has('body') ? '  is-invalid' : '' }}" required>
                                 {!! old('body') !!}
                             </script>
                             @if ($errors->has('body'))
@@ -50,73 +50,40 @@
 
     $(document).ready(function() {
         function formatTopic (topic) {
-
             return "<div class='select2-result-repository clearfix'>" +
-
             "<div class='select2-result-repository__meta'>" +
-
             "<div class='select2-result-repository__title'>" +
-
             topic.name ? topic.name : "Laravel"   +
-
                 "</div></div></div>";
-
         }
-
-
         function formatTopicSelection (topic) {
             return topic.name || topic.text;
-
         }
-
-
         $(".js-example-placeholder-multiple").select2({
-
             tags: true,
-
             placeholder: '选择相关话题',
-
             minimumInputLength: 2,
-
             ajax: {
-
                 url: '/api/topics',
-
                 dataType: 'json',
-
                 delay: 250,
-
                 data: function (params) {
-
                     return {
-
                         q: params.term
-
                     };
-
                 },
-
                 processResults: function (data, params) {
-
                     return {
-
                         results: data
-
                     };
-
                 },
-
                 cache: true
-
             },
-
             templateResult: formatTopic,
-
             templateSelection: formatTopicSelection,
-
             escapeMarkup: function (markup) { return markup; }
-
         });
     });
-    </script>@endsection
+    </script>
+@endsection
 @endsection

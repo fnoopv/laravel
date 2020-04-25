@@ -57,6 +57,6 @@ class TopicShowController extends Controller
 
         $topics = Topic::find($topic);
 
-        return view('topic.info',compact(['questions','topics']));
+        return view('topic.info',compact('questions','topics'));
     }
 }

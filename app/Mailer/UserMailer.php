@@ -17,7 +17,7 @@ class UserMailer extends Mailer
     public function followNotifyEmail($email)
     {
         $data = [
-            'url' => url('http://askforwhat.win'),
+            'url' => url('http://talk.test'),
             'name' => Auth::guard('api')->user()->name,
         ];
 
