@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" style="width: auto;">
+                <div class="card" style="width: auto; margin-top: 1rem">
                     <div class="card-header" style="font-size: 22px; font-weight: 600;">
                         提出的问题
                     </div>

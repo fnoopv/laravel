@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="margin-top: 5rem">
+    <div class="container">
         <div>
             <h3 style="font-weight: bold">已关注的话题</h3>
             <hr>

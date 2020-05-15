@@ -35,8 +35,9 @@
                         </li>
                     </ul>
                 </div>
-                <form class="form-inline my-2 my-lg-0" style="margin-left: 20px">
-                    <input class="form-control mr-sm-3" type="search" placeholder="搜索用户 话题 文章" aria-label="Search">
+                <form class="form-inline my-2 my-lg-0" style="margin-left: 20px" action="/search" method="post">
+                    {{ csrf_field() }}
+                    <input class="form-control mr-sm-3" type="search" placeholder="搜索用户 话题 文章" aria-label="Search" id="key" name="key">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
                 </form>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +87,21 @@
         <div class="container" style="text-align: center;">
             @include('flash::message')
         </div>
-        @yield('content')
+        <div style="padding-top: 5rem">
+            @yield('content')
+        </div>
+
+        <footer class="footer navbar-fixed-bottom" style="margin: 2rem 0 2rem 0">
+            <div class="container-fluid">
+                <div style="text-align: center">
+                    <ul style="list-style: none">
+                        <li>Copyright@2020 fnoopv</li>
+                        <li>联系站长：<a href="mailto:fnoopv@outlook.com?subject=网站建议">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
     </div>
 
     <!-- Scripts -->

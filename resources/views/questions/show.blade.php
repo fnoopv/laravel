@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" id="top" style="margin-top: 5rem">
+<div class="container" id="top">
     <div class="row">
         <div class="col-md-9">
             <div class="card">
@@ -20,14 +20,14 @@
                         <form action="/questions/{{ $question->id }}" method="post" class="delete-form card-text">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
-                            <button class="button is-naked delete-button card-link">删除</button>
+                            <button class="button is-naked delete-button card-link" type="submit">删除</button>
                         </form>
                     @endif
                 </div>
             </div>
-            <div class="card">
+            <div class="card" style="margin-top: 1rem">
                 <div class="card-header">
-                    {{ $question->answers_count }} answers
+                    {{ $question->answers_count }} 个答案
                 </div>
                 <div class="card-body content">
                     @foreach($question->answers as $answer)
@@ -48,13 +48,13 @@
                     @endforeach
                 </div>
             </div>
-            <div class="card">
+            <div class="card" style="margin-top: 1rem">
                 <div class="card-body">
                     @if(Auth::check())
                         <form action="/questions/{{ $question->id }}/answer" method="post">
                             {!! csrf_field() !!}
                             <div class="form-group">
-                                <label for="ueditor">添加答案</label>
+                                <label for="ueditor">回答此问题</label>
                                 <script id="ueditor" name="body" type="text/plain"  class="{{ $errors->has('body') ? '  is-invalid' : '' }}" style="width: 100%;" required>
                                     {!! old('body') !!}
                                 </script>

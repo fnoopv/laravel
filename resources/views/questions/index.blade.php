@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container" id="top" style="margin-top: 5rem">
+    <div class="container" id="top">
         <div class="row">
             <div class="col-md-8">
                 @foreach($questions as $question)
@@ -17,13 +17,17 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 <a href="/questions/{{ $question->id }}" style="font-weight: bold;color: black">{{ $question->title }}</a>
-                                <question-follow-button class="float-right" question="{{ $question->id }}"></question-follow-button>
+                                @auth
+                                    <question-follow-button class="float-right" question="{{ $question->id }}"></question-follow-button>
+                                @endauth
                             </h5>
                             <p class="card-text">{!! html_entity_decode($question->body) !!}</p>
                             <div>
                                 <span>{{ $question->getQuestionCount($question->id) }} 条评论</span>
                                 <span style="margin-left: 20px">
-                                    <favorite-question question="{{ $question->id }}"></favorite-question>
+                                    @auth
+                                        <favorite-question question="{{ $question->id }}"></favorite-question>
+                                    @endauth
                                 </span>
                             </div>
                         </div>

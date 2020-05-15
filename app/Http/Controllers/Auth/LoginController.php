@@ -49,7 +49,7 @@ class LoginController extends Controller
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
-            return $this->sendLockoutResponse($request);
+            $this->sendLockoutResponse($request);
         }
 
         if ($this->attemptLogin($request)) {
@@ -66,7 +66,7 @@ class LoginController extends Controller
     }
 
 
-    //重写attemptlohin方法
+    //重写attemptLogin方法
     protected function attemptLogin(Request $request)
     {
         $credentials = array_merge($this->credentials($request),['is_active' => 1]);

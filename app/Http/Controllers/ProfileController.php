@@ -20,13 +20,13 @@ class ProfileController extends Controller
     {
         $public  = User::find($user);
         $private = Profile::where('user_id',$user);
-        return view('user.admin',compact(['public','private']));
+        return view('user.admin',compact('public','private'));
     }
 
     public function edit($user)
     {
         $user = User::find($user);
-        return view('user/edit',compact('user'));
+        return view('user.edit',compact('user'));
     }
 
     /**

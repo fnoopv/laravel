@@ -55,3 +55,6 @@ Route::middleware('auth:api')->post('/message/store','MessagesController@store')
 
 Route::middleware('auth:api')->get('/user/favorited/{question}','FavoriteController@index');
 Route::middleware('auth:api')->post('/user/favorite','FavoriteController@favorite');
+Route::get('/users/pie','ChartDataController@sex');
+Route::get('/users/line','ChartDataController@userDayUp');
+Route::get('/users/bar','ChartDataController@userMonthUp');

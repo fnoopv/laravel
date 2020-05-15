@@ -10,12 +10,12 @@ return [
     /*
      * Logo in admin panel header.
      */
-    'logo' => '<b style="color: green">One</b> admin',
+    'logo' => '<b style="color: black">One</b> admin',
 
     /*
      * Mini-logo in admin panel header.
      */
-    'logo-mini' => '<b style="color: green">O</b>',
+    'logo-mini' => '<b style="color: black">O</b>',
 
     /*
      * Route configuration.

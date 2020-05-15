@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', 'QuestionsController@index');
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Auth::routes();
+
+Route::get('/', 'QuestionsController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -52,3 +55,4 @@ Route::get('discover','DiscoverController@index');
 
 Route::get('/test','TestController@index');
 Route::get('/test/store','TestController@show');
+Route::post('/search', 'SearchController@search');

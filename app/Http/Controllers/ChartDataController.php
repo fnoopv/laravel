@@ -6,7 +6,7 @@
  * Time: 17:28
  */
 
-namespace App\Admin\Controllers;
+namespace App\Http\Controllers;
 
 use App\Profile;
 use App\User;
